@@ -47,8 +47,6 @@ def juego_monedas(monedas):
 
     while monedas:
 
-        print(f"Monedas: {monedas}")
-
         if turno_sophia:
 
             puntaje_sophia, monedas = jugar_turno(puntaje_sophia, monedas, turno_sophia)
