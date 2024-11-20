@@ -1,86 +1,15 @@
 # Estrategia de Mateo
 
-def primer_moneda_mayor_valor(monedas):
-    return monedas[0] > monedas[-1]
-
 def mateo_elige(monedas):
-
-    if primer_moneda_mayor_valor(monedas):
-
+    # Regla greedy: elegir la moneda que maximice la temprana ganancia de Mateo
+    if monedas[0] > monedas[-1]:
         return monedas[0], monedas[1:]
-    
     else:
-
         return monedas[-1], monedas[:-1]
 
 
 
 #  Estrategia de Sofia
-
-# Vieja implementación
-def Tomar_moneda_y_actualizar(monedas, valor_al_elegir_primera, valor_al_elegir_ultima, inicio, fin):
-
-    if valor_al_elegir_primera >= valor_al_elegir_ultima:
-
-        moneda_elegida = monedas[inicio]
-        monedas_actualizadas = monedas[1:]
-    else:
-
-        moneda_elegida = monedas[fin]
-        monedas_actualizadas = monedas[:-1]
-
-    return monedas_actualizadas, moneda_elegida    
-
-def inicializar_tabla_dp(n):
-
-    dp = []
-
-    for i in range(n):
-
-        fila = [0] * n
-        dp.append(fila)
-
-    return dp
-
-def calcular_valores_al_elegir(monedas, dp, inicio, fin):
-
-    if inicio + 1 <= fin:
-
-        valor_al_elegir_primera = monedas[inicio] - dp[inicio + 1][fin]
-
-    else:
-
-        valor_al_elegir_primera = monedas[inicio]
-
-    if inicio <= fin - 1:
-
-        valor_al_elegir_ultima = monedas[fin] - dp[inicio][fin - 1]
-
-    else:
-
-        valor_al_elegir_ultima = monedas[fin]
-
-    return valor_al_elegir_primera, valor_al_elegir_ultima
-
-def calcular_optimos(monedas):
-
-    n = len(monedas)
-    dp = inicializar_tabla_dp(n)
-
-    for i in range(n):
-
-        dp[i][i] = monedas[i]
-
-    for longitud in range(2, n + 1):
-        for i in range(n - longitud + 1):
-
-            j = i + longitud - 1
-            
-            valor_al_elegir_primera, valor_al_elegir_ultima = calcular_valores_al_elegir(monedas, dp, i, j)
-            dp[i][j] = max(valor_al_elegir_primera, valor_al_elegir_ultima)
-
-    return dp
-
 
 # Nueva implementación, sacada de RPL lunatico 
 def lunatico(ganancias):
@@ -164,17 +93,7 @@ def sophia_elige(monedas):
     if n == 0:
         return 0, monedas
     
-    ''' Vieja implementación
-    dp = calcular_optimos(monedas)
-
-    izquierda = 0
-    derecha = n - 1
-
-    valor_al_elegir_primera, valor_al_elegir_ultima = calcular_valores_al_elegir(monedas, dp, izquierda, derecha)
-
-    monedas_actualizadas, moneda_elegida = Tomar_moneda_y_actualizar(monedas, valor_al_elegir_primera, valor_al_elegir_ultima, izquierda, derecha)
-
-    '''
+    ''' Forma lunatico
     # Utilizar el algoritmo lunatico para elegir las monedas
     indices_robados = lunatico(monedas)
     if not indices_robados:
@@ -184,8 +103,47 @@ def sophia_elige(monedas):
     indice_elegido = indices_robados[0]
     moneda_elegida = monedas[indice_elegido]
     monedas_actualizadas = monedas[:indice_elegido] + monedas[indice_elegido + 1:]
+    '''
+   
+   
+    # Evaluar las dos opciones: elegir la primera o la última moneda
+    primera_moneda = monedas[0]
+    ultima_moneda = monedas[-1]
+
+    # Simular la elección de la primera moneda
+    monedas_si_elige_primera = monedas[1:]
+    if len(monedas_si_elige_primera) > 1:
+        mateo_elige_primera = max(monedas_si_elige_primera[0], monedas_si_elige_primera[-1])
+    else:
+        if monedas_si_elige_primera:
+            mateo_elige_primera = monedas_si_elige_primera[0]
+        else:
+            mateo_elige_primera = 0
+    ganancia_si_elige_primera = primera_moneda + (sum(monedas_si_elige_primera) - mateo_elige_primera)
+
+    # Simular la elección de la última moneda
+    monedas_si_elige_ultima = monedas[:-1]
+    if len(monedas_si_elige_ultima) > 1:
+        mateo_elige_ultima = max(monedas_si_elige_ultima[0], monedas_si_elige_ultima[-1])
+    else:
+        if monedas_si_elige_ultima:
+            mateo_elige_ultima = monedas_si_elige_ultima[0]
+        else:
+            mateo_elige_ultima = 0
+    ganancia_si_elige_ultima = ultima_moneda + (sum(monedas_si_elige_ultima) - mateo_elige_ultima)
+
+    # Elegir la opción que maximice la ganancia futura de Sofía
+    if ganancia_si_elige_primera > ganancia_si_elige_ultima:
+        moneda_elegida = primera_moneda
+        monedas_actualizadas = monedas[1:]
+    else:
+        moneda_elegida = ultima_moneda
+        monedas_actualizadas = monedas[:-1]
+
 
     return moneda_elegida, monedas_actualizadas
+
+
 
 
 # Juego de monedas
@@ -197,14 +155,10 @@ def actualizar_puntaje(puntaje, moneda):
 def elegir_moneda_y_actualizar(puntaje, monedas, turno_sophia):
 
     if turno_sophia:
-
         moneda, monedas_actualizadas = sophia_elige(monedas)
-
     else:
-
         moneda, monedas_actualizadas = mateo_elige(monedas)
         
-
     puntaje_actualizado = actualizar_puntaje(puntaje, moneda)
 
     return puntaje_actualizado, monedas_actualizadas
@@ -224,8 +178,14 @@ def juego_monedas(monedas):
 
 
     while monedas:
-        print(turno_sophia)
-        print(f"Monedas: {monedas}")
+
+
+        if(turno_sophia):
+            print("Turno de Sophia")
+        else:
+            print("Turno de Mateo")
+
+        print(f"Monedas antes de elegir: {monedas}")
 
         if turno_sophia:
 

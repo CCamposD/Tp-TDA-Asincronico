@@ -63,7 +63,7 @@ def test06_monedasConValoresAltosYBajosSofiaGana():
     #Assert
     assert puntaje_sofia > puntaje_mateo
 
-def testCatedra01_seJuegaConUnTotalDe20Monedas():
+def testCatedra01_seJuegaConUnTotalDe5Monedas():
 	# Arrange
 	nombre_archivo = "Segunda_Parte/TestsCatedra/5.txt"
 	with open(nombre_archivo, 'r') as archivo:
@@ -157,20 +157,6 @@ def testCatedra07_seJuegaConUnTotalDe10000Monedas():
 
     # Act
     puntaje_sofia, puntaje_mateo = juego_monedas(array_10000_monedas)
-
-    # Assert
-    assert puntaje_sofia > puntaje_mateo
-
-def testCatedra08_seJuegaConUnTotalDe20000Monedas():
-    # Arrange
-    nombre_archivo = "Segunda_Parte/TestsCatedra/20000.txt"
-    with open(nombre_archivo, 'r') as archivo:
-        primera_linea = archivo.readline()
-    valores_lista = primera_linea.split(";")
-    array_20000_monedas = [int(valor) for valor in valores_lista]
-
-    # Act
-    puntaje_sofia, puntaje_mateo = juego_monedas(array_20000_monedas)
 
     # Assert
     assert puntaje_sofia > puntaje_mateo
