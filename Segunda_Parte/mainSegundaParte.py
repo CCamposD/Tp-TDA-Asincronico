@@ -86,65 +86,50 @@ def lunatico(ganancias):
         return sorted(casas_robadas1)
     else:
         return sorted(casas_robadas2)
+    
+##################################################
 
 def sophia_elige(monedas):
     n = len(monedas)
-
     if n == 0:
         return 0, monedas
     
-    ''' Forma lunatico
-    # Utilizar el algoritmo lunatico para elegir las monedas
-    indices_robados = lunatico(monedas)
-    if not indices_robados:
-        return 0, monedas
+    # Crear una tabla
+    dp = [[0] * n for _ in range(n)]
+    
+    # Crear una tabla de sumas acumuladas para evitar recalcular sumas repetidas
+    suma_acumulada = [0] * (n + 1)
+    for i in range(1, n + 1):
+        suma_acumulada[i] = suma_acumulada[i - 1] + monedas[i - 1]
 
-    # Elegir la primera moneda de los índices robados
-    indice_elegido = indices_robados[0]
-    moneda_elegida = monedas[indice_elegido]
-    monedas_actualizadas = monedas[:indice_elegido] + monedas[indice_elegido + 1:]
-    '''
-   
-   
-    # Evaluar las dos opciones: elegir la primera o la última moneda
-    primera_moneda = monedas[0]
-    ultima_moneda = monedas[-1]
+    # Llenar la tabla dp de manera iterativa
+    for longitud in range(2, n + 1):  # Desde intervalos de tamaño 2 hasta n
+        for i in range(n - longitud + 1):
+            j = i + longitud - 1
+            suma_intervalo = suma_acumulada[j + 1] - suma_acumulada[i]
+            elegir_primera = monedas[i] + (suma_intervalo - dp[i + 1][j] if i + 1 <= j else 0)
+            elegir_ultima = monedas[j] + (suma_intervalo - dp[i][j - 1] if i <= j - 1 else 0)
+            dp[i][j] = max(elegir_primera, elegir_ultima)
 
-    # Simular la elección de la primera moneda
-    monedas_si_elige_primera = monedas[1:]
-    if len(monedas_si_elige_primera) > 1:
-        mateo_elige_primera = max(monedas_si_elige_primera[0], monedas_si_elige_primera[-1])
-    else:
-        if monedas_si_elige_primera:
-            mateo_elige_primera = monedas_si_elige_primera[0]
+    # Determinar la decisión de Sophia
+    i, j = 0, n - 1
+    while i <= j:
+        suma_intervalo = suma_acumulada[j + 1] - suma_acumulada[i]  # Recalcular la suma solo una vez
+        if dp[i][j] == monedas[i] + (suma_intervalo - dp[i + 1][j]):
+            moneda_elegida = monedas[i]
+            i += 1
         else:
-            mateo_elige_primera = 0
-    ganancia_si_elige_primera = primera_moneda + (sum(monedas_si_elige_primera) - mateo_elige_primera)
+            moneda_elegida = monedas[j]
+            j -= 1
+        break
 
-    # Simular la elección de la última moneda
-    monedas_si_elige_ultima = monedas[:-1]
-    if len(monedas_si_elige_ultima) > 1:
-        mateo_elige_ultima = max(monedas_si_elige_ultima[0], monedas_si_elige_ultima[-1])
-    else:
-        if monedas_si_elige_ultima:
-            mateo_elige_ultima = monedas_si_elige_ultima[0]
-        else:
-            mateo_elige_ultima = 0
-    ganancia_si_elige_ultima = ultima_moneda + (sum(monedas_si_elige_ultima) - mateo_elige_ultima)
-
-    # Elegir la opción que maximice la ganancia futura de Sofía
-    if ganancia_si_elige_primera > ganancia_si_elige_ultima:
-        moneda_elegida = primera_moneda
-        monedas_actualizadas = monedas[1:]
-    else:
-        moneda_elegida = ultima_moneda
-        monedas_actualizadas = monedas[:-1]
-
-
+    # Actualizar las monedas restantes
+    monedas_actualizadas = monedas[i:j + 1]
     return moneda_elegida, monedas_actualizadas
 
 
 
+#######################################
 
 # Juego de monedas
 

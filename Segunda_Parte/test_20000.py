@@ -1,4 +1,4 @@
-from Mateo_empieza_a_jugar import juego_monedas
+from mainSegundaParte import juego_monedas
 
 def test_20000():
     nombre_archivo = "Primera_Parte/TestsCatedra/10000.txt"
