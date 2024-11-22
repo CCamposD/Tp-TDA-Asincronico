@@ -1,4 +1,4 @@
-from main import juego_monedas
+from Primera_Parte.mainPrimeraParte import juego_monedas
 
 def test_01_10_monedas_gana_sofia():
 	a = [0,1,2,3,4,5,6,7,8,9]
