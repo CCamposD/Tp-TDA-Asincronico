@@ -1,29 +1,22 @@
 import os
 
-
-#BATALLA NAVAL
-
-def pedir_barcos(ancho, alto):
+def pedir_barcos():
+    """
+    Solicita al usuario la cantidad de barcos de cada tipo y devuelve una lista de sus longitudes.
+    """
     os.system("cls")
 
-    diccionario_barcos = {"Portaaviones": 4, "Submarino": 3, "Destructor": 2, "lancha": 1}
+    tipos_barcos = {"Portaaviones": 4, "Submarino": 3, "Destructor": 2, "Lancha": 1}
+    barcos = []
 
-    # Pedir cantidad de barcos de cada tipo
-    for barco in diccionario_barcos:
-
-        cantidad_cada_barco = int(input("\n\nIngrese la cantidad de barcos de tipo " + barco + " que desea: "))
-
-        diccionario_barcos[barco] = cantidad_cada_barco
-
-    # Imprimir cantidad de barcos de cada tipo
-    for barco in diccionario_barcos:
-        print(f"\nBarcos de tipo {barco}: {diccionario_barcos[barco]}")
-
-    
-
-    input("\n\nPresione enter para continuar...")
+    print("Ingrese la cantidad de barcos de cada tipo:")
+    for tipo, longitud in tipos_barcos.items():
+        try:
+            cantidad = int(input(f"{tipo} (longitud {longitud}): "))
+            barcos.extend([longitud] * cantidad)
+        except ValueError:
+            print("Por favor, ingrese un número válido.")
+            return pedir_barcos()
 
     os.system("cls")
-    return 
-
-pedir_barcos(10, 10)
+    return barcos
