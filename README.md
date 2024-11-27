@@ -5,8 +5,9 @@
 Este proyecto implementa un juego de selección de monedas entre dos jugadores, Sofia y Mateo:
 
 	1) En la carpeta 'Primera_Parte', destacá el Algoritmo Greedy, para que Sofia sea siempre la ganadora
-	2) ...
-	3) ...
+	2) En la carpeta 'Segunda_Parte', destacán el Algoritmo Greedy, usado por Mateo, y la Programacion Dinamica, usada por Sofia, lo cual le da una ventaja significativa
+ 	   dandole asi, mas oportunidades de ganar.
+	3) En la carpeta 'Tercera_Parte', destacá el Algoritmo BackStracking, para tomar las descisiones mas optimas a la hora de posicionar los barcos
 
 # Pruebas
 Se relearizaron distintas pruebas con el fin de ...rellenar....
@@ -28,7 +29,6 @@ Luego, en la extensión de Pruebas/Tests de VSCode, puedes usar el botón para e
 para más detalles sobre la parte que deseas probar.
 
 ## Integrantes
-- 110470
 - 110280
 - 108882
 - 109368
