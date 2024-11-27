@@ -24,9 +24,15 @@ def imprimir_tablero(tablero):
     """
     Imprime el tablero de forma legible.
     """
-
     print("\nTablero:")
     
     for fila in tablero:
-        print(" ".join(str(celda) for celda in fila))
-    print()
+        print(" ".join(str(celda) for celda in fila)," ".join(f"| {sum(fila)}"))
+    
+
+    print(" ".join("-" for _ in range(len(tablero[0]))))
+
+    for i in range(len(tablero[0])):
+        print(sum(tablero[j][i] for j in range(len(tablero))), end=" ")
+
+    print("\n")
