@@ -1,4 +1,4 @@
-from Primera_Parte.mainPrimeraParte import juego_monedas
+from mainPrimeraParte import juego_monedas
 
 def test_01_10_monedas_gana_sofia():
 	a = [0,1,2,3,4,5,6,7,8,9]
@@ -117,6 +117,7 @@ def testCatedra06SeJuegaConUnTotalDe10000Monedas():
 def testCatedra07SeJuegaConUnTotalDe20000Monedas():
 	" Arrange " # Arrange
 	nombre_archivo = "Primera_Parte/TestsCatedra/20000.txt"
+	
 	with open(nombre_archivo, 'r') as archivo:
 		primera_linea = archivo.readline() 
 	valores_lista = primera_linea.split(";")
