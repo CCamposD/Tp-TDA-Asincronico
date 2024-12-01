@@ -1,29 +1,40 @@
 def parametros_tablero():
 
-    """
+    '''
     Solicita las dimensiones del tablero al usuario.
-    """
+    '''
+    condicion = True
+    while condicion:
 
-    ancho = int(input("Ingrese el ancho del tablero: "))
-    alto = int(input("Ingrese el alto del tablero: "))
+        try:
+            ancho = int(input("Ancho del tablero: "))
+            alto = int(input("Alto del tablero: "))
+
+            if ancho > 0 and alto > 0:
+                condicion = False
+            else:
+                print("Por favor, ingrese un número mayor a 0.")
+
+        except ValueError:
+            print("Por favor, ingrese un número válido.")
 
     return ancho, alto
 
 
 def inicializar_tablero(ancho, alto):
 
-    """
+    '''
     Crea un tablero vacío con dimensiones dadas.
-    """
+    '''
 
-    return [[0 for _ in range(ancho)] for _ in range(alto)]
+    return [[0 for i in range(ancho)] for i in range(alto)]
 
 
 def imprimir_tablero(tablero):
 
-    """
-    Imprime el tablero de forma legible.
-    """
+    '''
+    Imprime el tablero.
+    '''
     print("\nTablero:")
     
     for fila in tablero:
