@@ -93,17 +93,17 @@ def sophia_elige(monedas):
     n = len(monedas)
     if n == 0:
         return 0, monedas
-    
+
     # Crear una tabla
     dp = [[0] * n for _ in range(n)]
-    
+
     # Crear una tabla de sumas acumuladas para evitar recalcular sumas repetidas
     suma_acumulada = [0] * (n + 1)
     for i in range(1, n + 1):
         suma_acumulada[i] = suma_acumulada[i - 1] + monedas[i - 1]
 
     # Llenar la tabla dp de manera iterativa
-    for longitud in range(2, n + 1):  # Desde intervalos de tamaño 2 hasta n
+    for longitud in range(1, n + 1):  # Desde intervalos de tamaño 1 hasta n
         for i in range(n - longitud + 1):
             j = i + longitud - 1
             suma_intervalo = suma_acumulada[j + 1] - suma_acumulada[i]
@@ -115,17 +115,17 @@ def sophia_elige(monedas):
     i, j = 0, n - 1
     while i <= j:
         suma_intervalo = suma_acumulada[j + 1] - suma_acumulada[i]  # Recalcular la suma solo una vez
-        if dp[i][j] == monedas[i] + (suma_intervalo - dp[i + 1][j]):
-            moneda_elegida = monedas[i]
+        if i + 1 <= j and dp[i][j] == monedas[i] + (suma_intervalo - dp[i + 1][j]):
+            moneda = monedas[i]
             i += 1
         else:
-            moneda_elegida = monedas[j]
+            moneda = monedas[j]
             j -= 1
-        break
+        break  # Sophia elige una vez
 
-    # Actualizar las monedas restantes
     monedas_actualizadas = monedas[i:j + 1]
-    return moneda_elegida, monedas_actualizadas
+    return moneda, monedas_actualizadas
+
 
 
 
@@ -185,3 +185,11 @@ def juego_monedas(monedas):
 
     return puntaje_sophia, puntaje_mateo
 
+
+monedas = [96,594,437,674,950]
+
+puntaje_sofia, puntaje_mateo = juego_monedas(monedas)
+
+print(f"Puntaje de Sofia: {puntaje_sofia}")
+
+print(f"Puntaje de Mateo: {puntaje_mateo}")

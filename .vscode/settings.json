@@ -1,7 +1,6 @@
 {
     "python.testing.pytestArgs": [
-        "Primera_Parte",
-        "Segunda_Parte"
+        "."
     ],
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true
