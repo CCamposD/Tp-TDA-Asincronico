@@ -117,6 +117,18 @@ def colocar_barcos_backtracking(tablero, barcos, indice=0):
 
     return False
 
+def colocar_barco_greedy(tablero, largo):
+
+    for fila in range(len(tablero)):
+        for columna in range(len(tablero[0])):
+            for direccion in ["H", "V"]:
+
+                if es_valida(tablero, fila, columna, largo, direccion):
+                    colocar_barco(tablero, fila, columna, largo, direccion)
+                    return True
+    return False
+
+
 #PRE: Recibe un tablero, una lista de barcos y una opción de estrategia
 #POST: Devuelve el tablero actualizado, un diccionario de barcos no colocados y una de los barcos colocados
 def colocar_barcos_como_sea_posible(tablero, barcos, opcion):
@@ -129,7 +141,7 @@ def colocar_barcos_como_sea_posible(tablero, barcos, opcion):
         
         for tipo, largo in barcos:
             
-            if not intentar_colocar_barco(tablero, largo):
+            if not colocar_barco_greedy(tablero, largo):
                 
                 if tipo in barcos_no_colocados:
                     barcos_no_colocados[tipo] += 1
