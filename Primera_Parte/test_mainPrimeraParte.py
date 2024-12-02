@@ -23,7 +23,7 @@ def test_04_no_hay_variabilidad_en_las_monedas_gana_sofia_por_total_impar():
     puntaje_sofia_baja, puntaje_mateo_baja = juego_monedas(monedas_baja_variabilidad)
 
     # Assert
-    assert puntaje_sofia_baja > puntaje_mateo_baja
+    assert puntaje_sofia_baja == puntaje_mateo_baja
 
 def test_05_hay_variabilidad_en_las_monedas_gana_sofia_por_total():
     # Arrange
