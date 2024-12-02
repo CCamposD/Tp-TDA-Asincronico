@@ -45,8 +45,7 @@ def juego_monedas(monedas):
     puntaje_mateo = 0
     turno_sophia = True
 
-    while monedas.any():
-
+    while monedas:
 
         if turno_sophia:
 
