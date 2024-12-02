@@ -1,9 +1,9 @@
 import os
 
+#PRE: -
+#POST: Se le pide al usuario los valores longitud y cantidad de barcos de cada tipo
 def pedir_barcos():
-    '''
-    Solicita al usuario la cantidad de barcos de cada tipo y devuelve una lista de sus longitudes junto con los tipos.
-    '''
+    
     os.system("cls")
 
     tipos_barcos = {"Porta avion": 0, "Submarino": 0, "Destructor": 0, "Lancha": 0}
@@ -24,6 +24,8 @@ def pedir_barcos():
     os.system("cls")
     return barcos
 
+#PRE: Recibe una lista de barcos
+#POST: Imprime los barcos que no pudieron ser colocados
 def imprimir_barcos_no_colocados(barcos_no_colocados):
     
     if barcos_no_colocados:

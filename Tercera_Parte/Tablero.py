@@ -1,8 +1,7 @@
+#PRE:
+#POST: Se le pide al usuario los valores de ancho y alto del tablero
 def parametros_tablero():
 
-    '''
-    Solicita las dimensiones del tablero al usuario.
-    '''
     condicion = True
     while condicion:
 
@@ -20,21 +19,16 @@ def parametros_tablero():
 
     return ancho, alto
 
-
+#PRE: Recibe un ancho y un alto del tablero
+#POST: Devuelve una lista de listas con el tablero inicializado
 def inicializar_tablero(ancho, alto):
-
-    '''
-    Crea un tablero vacío con dimensiones dadas.
-    '''
 
     return [[0 for i in range(ancho)] for i in range(alto)]
 
-
+#PRE: Recibe un tablero
+#POST: Imprime el tablero
 def imprimir_tablero(tablero):
 
-    '''
-    Imprime el tablero.
-    '''
     print("\nTablero:")
     
     for fila in tablero:

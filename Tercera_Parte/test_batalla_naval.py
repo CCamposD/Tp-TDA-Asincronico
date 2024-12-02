@@ -6,7 +6,6 @@ import main
 def test_01_inicializar_tablero():
     tablero = Tablero.inicializar_tablero(5, 5)
 
-    #el tablero debe ser una lista de 5 listas, cada una con 5 ceros
 
     assert len(tablero) == 5
     assert all(len(fila) == 5 for fila in tablero)
@@ -17,7 +16,7 @@ def test_02_colocar_barcos_en_tablero_vacio():
     tablero = Tablero.inicializar_tablero(5, 5)
     barcos = [("Porta aviones", 4), ("Submarino", 3), ("Destructor", 2), ("Lancha", 1)]
 
-    tablero, barcos_no_colocados = main.colocar_barcos_como_sea_posible(tablero, barcos, 2)
+    tablero, barcos_no_colocados, barcos_en_el_tablero = main.colocar_barcos_como_sea_posible(tablero, barcos, 2)
 
     # El tablero debe tener barcos en él
     assert any(celda != 0 for fila in tablero for celda in fila)
@@ -29,18 +28,18 @@ def test_03_sobran_barcos():
     tablero = Tablero.inicializar_tablero(3, 3)
     barcos = [("Porta aviones", 4), ("Submarino", 3), ("Destructor", 2), ("Lancha", 1)]
 
-    tablero, barcos_no_colocados = main.colocar_barcos_como_sea_posible(tablero, barcos, 2)
+    tablero, barcos_no_colocados, barcos_en_el_tablero = main.colocar_barcos_como_sea_posible(tablero, barcos, 2)
 
-    # Deben haber sobrado 1 Porta aviones y 1 Lancha
+
     assert barcos_no_colocados == {"Porta aviones": 1, "Lancha": 1}
 
 def test_04_colocar_todos_los_barcos():
     tablero = Tablero.inicializar_tablero(5, 5)
     barcos = [("Porta aviones", 4), ("Submarino", 3), ("Destructor", 2), ("Lancha", 1)]
 
-    tablero, barcos_no_colocados = main.colocar_barcos_como_sea_posible(tablero, barcos, 2)
+    tablero, barcos_no_colocados, barcos_en_el_tablero = main.colocar_barcos_como_sea_posible(tablero, barcos, 2)
 
-    # No debe haber sobrado ningún barco
+    
     assert barcos_no_colocados == {}
 
 def test_05_la_posicion_no_es_valida():
@@ -90,7 +89,7 @@ def test_10_resolver_batalla_naval_greedy():
 
     barcos = [("Porta aviones", 4), ("Porta aviones", 4), ("Porta aviones", 4), ("Submarino", 3), ("Submarino", 3), ("Submarino", 3), ("Destructor", 2), ("Destructor", 2), ("Lancha", 1), ("Lancha", 1)]
 
-    tablero, barcos_no_colocados = main.colocar_barcos_como_sea_posible(tablero, barcos, 2)
+    tablero, barcos_no_colocados, barcos_en_el_tablero = main.colocar_barcos_como_sea_posible(tablero, barcos, 2)
 
     assert barcos_no_colocados == {}
 
@@ -101,7 +100,15 @@ def test_11_resolver_batalla_naval_greedy():
 
     barcos = [("Porta aviones", 4), ("Porta aviones", 4), ("Porta aviones", 4), ("Submarino", 3), ("Submarino", 3), ("Submarino", 3), ("Destructor", 2), ("Destructor", 2), ("Lancha", 1), ("Lancha", 1)]
 
-    tablero, barcos_no_colocados = main.colocar_barcos_como_sea_posible(tablero, barcos, 2)
+    tablero, barcos_no_colocados, barcos_en_el_tablero = main.colocar_barcos_como_sea_posible(tablero, barcos, 2)
 
     assert barcos_no_colocados == {}
 
+def test_12_tablero_1000_x_1000():
+    tablero = Tablero.inicializar_tablero(1000, 1000)
+    
+
+    barcos = [("Porta aviones", 4), ("Porta aviones", 4), ("Porta aviones", 4), ("Submarino", 3), ("Submarino", 3), ("Submarino", 3), ("Destructor", 2), ("Destructor", 2), ("Lancha", 1), ("Lancha", 1)] * 100
+
+    tablero, barcos_no_colocados, barcos_en_el_tablero = main.colocar_barcos_como_sea_posible(tablero, barcos, 2)
+    assert barcos_no_colocados == {}
