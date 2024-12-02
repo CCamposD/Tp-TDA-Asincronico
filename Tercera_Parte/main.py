@@ -104,7 +104,6 @@ def colocar_barcos_backtracking(tablero, barcos, indice=0):
     for fila in range(len(tablero)):
         for columna in range(len(tablero[0])):
             for direccion in ["H", "V"]:
-                
 
                 if es_valida(tablero, fila, columna, largo, direccion):
 
