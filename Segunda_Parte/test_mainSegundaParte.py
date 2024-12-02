@@ -63,6 +63,46 @@ def test06_monedasConValoresAltosYBajosSofiaGana():
     #Assert
     assert puntaje_sofia > puntaje_mateo
 
+def test07_seJuegaConMonedasParDondeTodosSusValoreSonIguales():
+    # Arrange
+    monedas = [5, 5, 5, 5, 5, 5]
+    
+    # Act
+    puntaje_sofia, puntaje_mateo = juego_monedas(monedas)
+    
+    # Assert
+    assert puntaje_sofia == puntaje_mateo
+
+def test08_seJuegaConMonedasImparDondeUnSoloNumeroEsSignificativamenteMayor():
+    # Arrange
+    monedas = [1, 1, 1, 1, 50, 1, 1]
+    
+    # Act
+    puntaje_sofia, puntaje_mateo = juego_monedas(monedas)
+    
+    # Assert
+    assert puntaje_sofia > puntaje_mateo
+
+def test09_seJuegaConMonedasImpararDondeTodosSusValoreSonIguales():
+    # Arrange
+    monedas = [2, 2, 2, 2, 2, 2, 2]
+    
+    # Act
+    puntaje_sofia, puntaje_mateo = juego_monedas(monedas)
+    
+    # Assert
+    assert puntaje_sofia > puntaje_mateo
+
+def test10_seJuegaConMonedasParDondeUnSoloNumeroEsSignificativamenteMayor():
+    # Arrange
+    monedas = [1, 1, 1, 80, 1, 1, 1, 1]
+    
+    # Act
+    puntaje_sofia, puntaje_mateo = juego_monedas(monedas)
+    
+    # Assert
+    assert puntaje_sofia > puntaje_mateo
+
 def testCatedra01_seJuegaConUnTotalDe5Monedas():
 	# Arrange
 	nombre_archivo = "Segunda_Parte/TestsCatedra/5.txt"
@@ -105,7 +145,21 @@ def testCatedra03_seJuegaConUnTotalDe20Monedas():
     # Assert
     assert puntaje_sofia > puntaje_mateo
 
-def testCatedra04_seJuegaConUnTotalDe50Monedas():
+def testCatedra04_seJuegaConUnTotalDe25Monedas():
+    # Arrange
+    nombre_archivo = "Segunda_Parte/TestsCatedra/25.txt"
+    with open(nombre_archivo, 'r') as archivo:
+        primera_linea = archivo.readline()
+    valores_lista = primera_linea.split(";")
+    array_25_monedas = [int(valor) for valor in valores_lista]
+
+    # Act
+    puntaje_sofia, puntaje_mateo = juego_monedas(array_25_monedas)
+
+    # Assert
+    assert puntaje_sofia > puntaje_mateo
+
+def testCatedra05_seJuegaConUnTotalDe50Monedas():
     # Arrange
     nombre_archivo = "Segunda_Parte/TestsCatedra/50.txt"
     with open(nombre_archivo, 'r') as archivo:
@@ -119,7 +173,7 @@ def testCatedra04_seJuegaConUnTotalDe50Monedas():
     # Assert
     assert puntaje_sofia > puntaje_mateo
 
-def testCatedra05_seJuegaConUnTotalDe100Monedas():
+def testCatedra06_seJuegaConUnTotalDe100Monedas():
     # Arrange
     nombre_archivo = "Segunda_Parte/TestsCatedra/100.txt"
     with open(nombre_archivo, 'r') as archivo:
@@ -133,7 +187,7 @@ def testCatedra05_seJuegaConUnTotalDe100Monedas():
     # Assert
     assert puntaje_sofia > puntaje_mateo
 
-def testCatedra06_seJuegaConUnTotalDe1000Monedas():
+def testCatedra07_seJuegaConUnTotalDe1000Monedas():
     # Arrange
     nombre_archivo = "Segunda_Parte/TestsCatedra/1000.txt"
     with open(nombre_archivo, 'r') as archivo:
@@ -147,7 +201,35 @@ def testCatedra06_seJuegaConUnTotalDe1000Monedas():
     # Assert
     assert puntaje_sofia > puntaje_mateo
 
-def testCatedra07_seJuegaConUnTotalDe10000Monedas():
+def testCatedra08_seJuegaConUnTotalDe2000Monedas():
+    # Arrange
+    nombre_archivo = "Segunda_Parte/TestsCatedra/2000.txt"
+    with open(nombre_archivo, 'r') as archivo:
+        primera_linea = archivo.readline()
+    valores_lista = primera_linea.split(";")
+    array_2000_monedas = [int(valor) for valor in valores_lista]
+
+    # Act
+    puntaje_sofia, puntaje_mateo = juego_monedas(array_2000_monedas)
+
+    # Assert
+    assert puntaje_sofia > puntaje_mateo
+
+def testCatedra09_seJuegaConUnTotalDe5000Monedas():
+    # Arrange
+    nombre_archivo = "Segunda_Parte/TestsCatedra/5000.txt"
+    with open(nombre_archivo, 'r') as archivo:
+        primera_linea = archivo.readline()
+    valores_lista = primera_linea.split(";")
+    array_5000_monedas = [int(valor) for valor in valores_lista]
+
+    # Act
+    puntaje_sofia, puntaje_mateo = juego_monedas(array_5000_monedas)
+
+    # Assert
+    assert puntaje_sofia > puntaje_mateo
+
+def testCatedra010_seJuegaConUnTotalDe10000Monedas():
     # Arrange
     nombre_archivo = "Segunda_Parte/TestsCatedra/10000.txt"
     with open(nombre_archivo, 'r') as archivo:
