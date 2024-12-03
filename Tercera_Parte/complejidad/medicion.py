@@ -1,8 +1,8 @@
 import matplotlib.pyplot as plt
-from main import colocar_barcos_backtracking  # Implementación exacta
-from main import aproximacion        # Algoritmo aproximado
+from Tercera_Parte.mainTerceraParte import colocar_barcos_backtracking  # Implementación exacta
+from Tercera_Parte.mainTerceraParte import aproximacion        # Algoritmo aproximado
 from Tablero import inicializar_tablero
-from main import colocar_barcos_como_sea_posible
+from Tercera_Parte.mainTerceraParte import colocar_barcos_como_sea_posible
 import numpy as np
 
 def generar_tablero(n):
@@ -39,7 +39,7 @@ def preparar_argumentos(size):
     tablero = generar_tablero(size)
     barcos = generar_barcos(size)
 
-    tablero_listo = colocar_barcos_como_sea_posible(tablero, barcos, 2)
+    tablero_listo = colocar_barcos_como_sea_posible(tablero, barcos, 1)
     return tablero_listo, barcos
 
 def calcular_rendimiento(instancias):

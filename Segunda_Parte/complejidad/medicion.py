@@ -1,6 +1,6 @@
 import os
 import matplotlib.pyplot as plt
-from util import time_algorithm
+from Segunda_Parte.complejidad.util import time_algorithm
 from mainSegundaParte import juego_monedas
 
 # Define una función para generar argumentos para juego_monedas

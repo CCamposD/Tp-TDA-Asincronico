@@ -1,7 +1,7 @@
 import os
 import matplotlib.pyplot as plt
-from util import time_algorithm
-from main import aproximacion
+from Tercera_Parte.complejidad.util import time_algorithm
+from Tercera_Parte.mainTerceraParte import aproximacion
 from Tablero import inicializar_tablero
 
 # Define una función para generar un tablero vacío
